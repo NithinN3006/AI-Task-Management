@@ -4,7 +4,7 @@ A full-stack, production-ready task management application built with Spring Boo
 
 ## Tech Stack
 - **Backend**: Java 21, Spring Boot 3.3, Spring Security, JWT (jjwt), Spring Data JPA, WebClient
-- **Database**: MySQL 8.0
+- **Database**: PostgreSQL 15
 - **Frontend**: React 18, Vite, Tailwind CSS v4, Zustand, Axios, React Hook Form, Zod
 
 ## Features
@@ -22,7 +22,7 @@ A full-stack, production-ready task management application built with Spring Boo
    ```bash
    export GEMINI_API_KEY="your_api_key_here"
    ```
-3. Start the Backend and MySQL database using Docker Compose:
+3. Start the Backend and PostgreSQL database using Docker Compose:
    ```bash
    docker-compose up --build -d
    ```
@@ -38,20 +38,26 @@ A full-stack, production-ready task management application built with Spring Boo
 
 ### Deployment Instructions
 
-#### Backend (Railway)
-1. Provision a MySQL 8 database on Railway.
-2. Connect your GitHub repository to Railway and deploy the `/backend` folder.
-3. Configure the following environment variables in the Railway dashboard:
-   - `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD` (from the provisioned MySQL instance)
+#### Database (Neon PostgreSQL)
+1. Create a PostgreSQL project on Neon.
+2. Obtain the connection string (DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD).
+
+#### Backend (Render)
+1. Connect your GitHub repository to Render and deploy a "Web Service".
+2. Set the Root Directory to `backend`.
+3. Use `mvn clean install` for the build command and `java -jar target/backend-0.0.1-SNAPSHOT.jar` for the start command.
+4. Configure the following environment variables:
+   - `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD` (from Neon)
    - `JWT_SECRET` (generate a strong 256-bit random string)
    - `GEMINI_API_KEY` (your Google AI Studio API key)
-4. Note: Ensure Railway uses Java 21 for the build environment.
+   - `FRONTEND_URL` (the Vercel production URL, e.g., `https://my-app.vercel.app`)
+5. Note: Ensure Render uses Java 21 for the build environment.
 
 #### Frontend (Vercel)
 1. Connect your GitHub repository to Vercel and deploy the `/frontend` folder.
 2. Select `Vite` as the framework preset.
 3. Set the following environment variable:
-   - `VITE_API_BASE_URL`: The deployed URL of your Railway backend + `/api` (e.g., `https://my-backend.railway.app/api`).
+   - `VITE_API_BASE_URL`: The deployed URL of your Render backend + `/api` (e.g., `https://my-backend.onrender.com/api`).
 
 ## API Endpoints
 

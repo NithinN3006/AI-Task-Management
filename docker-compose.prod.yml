@@ -16,9 +16,8 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+    # REPLACE "your-dockerhub-username" below with your actual username
+    image: nithin675/ai-task-management-backend:latest
     container_name: task_backend
     ports:
       - "8080:8080"
@@ -36,12 +35,11 @@ services:
       - postgres
 
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+    # REPLACE "your-dockerhub-username" below with your actual username
+    image: nithin675/ai-task-management-frontend:latest
     container_name: task_frontend
     ports:
-      - "5173:80"
+      - "80:80"
     networks:
       - app-network
     depends_on:
