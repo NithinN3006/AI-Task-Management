@@ -2,6 +2,11 @@
 
 A full-stack, production-ready task management application built with Spring Boot, React, and PostgreSQL. It features an AI-powered task detail generator using the Google Gemini API and a cryptographically verifiable "Blockchain-Style" Immutable Task Ledger.
 
+## Live Demo
+- **Frontend**: [https://ai-task-management-one.vercel.app](https://ai-task-management-one.vercel.app)
+- **Backend API**: [https://ai-task-management-xrd7.onrender.com/api](https://ai-task-management-xrd7.onrender.com/api)
+- **Database**: Render PostgreSQL
+
 ## Tech Stack
 - **Backend**: Java 21, Spring Boot 3.3, Spring Security, JWT (jjwt), Spring Data JPA, WebClient
 - **Database**: PostgreSQL 15
