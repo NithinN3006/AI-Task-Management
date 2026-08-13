@@ -1,6 +1,6 @@
 # AI Task Management System
 
-A full-stack, production-ready task management application built with Spring Boot, React, and MySQL. It features an AI-powered task detail generator using the Google Gemini API and a cryptographically verifiable "Blockchain-Style" Immutable Task Ledger.
+A full-stack, production-ready task management application built with Spring Boot, React, and PostgreSQL. It features an AI-powered task detail generator using the Google Gemini API and a cryptographically verifiable "Blockchain-Style" Immutable Task Ledger.
 
 ## Tech Stack
 - **Backend**: Java 21, Spring Boot 3.3, Spring Security, JWT (jjwt), Spring Data JPA, WebClient
@@ -38,16 +38,17 @@ A full-stack, production-ready task management application built with Spring Boo
 
 ### Deployment Instructions
 
-#### Database (Neon PostgreSQL)
-1. Create a PostgreSQL project on Neon.
-2. Obtain the connection string (DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD).
+#### Database (Render PostgreSQL)
+1. Go to your Render dashboard and click **New -> PostgreSQL**.
+2. Name your database (e.g., `ai-task-db`) and click **Create Database**.
+3. Obtain the internal or external connection details (DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD).
 
 #### Backend (Render)
 1. Connect your GitHub repository to Render and deploy a "Web Service".
 2. Set the Root Directory to `backend`.
 3. Use `mvn clean install` for the build command and `java -jar target/backend-0.0.1-SNAPSHOT.jar` for the start command.
 4. Configure the following environment variables:
-   - `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD` (from Neon)
+   - `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD` (from your new Render PostgreSQL instance)
    - `JWT_SECRET` (generate a strong 256-bit random string)
    - `GEMINI_API_KEY` (your Google AI Studio API key)
    - `FRONTEND_URL` (the Vercel production URL, e.g., `https://my-app.vercel.app`)
@@ -76,6 +77,6 @@ A full-stack, production-ready task management application built with Spring Boo
 The backend follows a standard layered architecture: **Controller → Service → Repository**.
 - **Controllers** handle HTTP routing and parameter validation (`@Valid`).
 - **Services** encapsulate business logic, including AI external calls (`AiService`) and hash generation (`LedgerService`).
-- **Repositories** interact with MySQL via Spring Data JPA.
+- **Repositories** interact with PostgreSQL via Spring Data JPA.
 
 The `LedgerService` hooks into the `TaskService` directly after any successful database commit, ensuring that every state change generates a new block in the task's hash chain.
